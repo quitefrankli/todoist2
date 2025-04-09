@@ -10,11 +10,13 @@ class GoalState(Enum):
     FAILED = 2
     BACKLOGGED = 3
 
+
 class Recurrence(BaseModel):
     start: datetime
     end: datetime
     repeat_period: Optional[timedelta]
     paused: bool
+
 
 class Goal(BaseModel):
     id: int
@@ -33,6 +35,7 @@ class DataPoint(BaseModel):
     date: datetime
     value: float
 
+
 class Metric(BaseModel):
     id: int
     name: str
@@ -42,7 +45,15 @@ class Metric(BaseModel):
     creation_date: datetime = datetime.now()
 
 
+class JournalEntry(BaseModel):
+    id: int
+    date: datetime
+    text: str
+    mood: int
+
+
 class TopLevelData(BaseModel):
     goals: Dict[int, Goal] = {}
     metrics: Dict[int, Metric] = {}
+    journal: List[JournalEntry] = []
     edited: datetime = datetime.now()
