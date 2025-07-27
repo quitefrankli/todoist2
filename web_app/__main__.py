@@ -185,10 +185,7 @@ scheduler = APScheduler()
 def scheduled_backup():
     logging.info("Running scheduled backup")
     instance = DataInterface.instance()
-    users = instance.load_users()
-    for user in users.values():
-        tld = instance.load_data(user)
-        instance.backup_data(tld, user)
+    instance.backup_data()
     logging.info("Backup complete")
 
 scheduler.start()
